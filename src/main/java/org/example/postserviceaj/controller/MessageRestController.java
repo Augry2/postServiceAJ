@@ -28,8 +28,9 @@ public class MessageRestController {
 
     // POST MSG
     @PostMapping("/messages")
-    public MessageEntity postMsg(@RequestBody MessageEntity messageEntity){
+    public MessageEntity postMsg(@RequestBody MessageEntity messageEntity, @RequestHeader String userId){
         messageEntity.setMsgDateAndTime(LocalDateTime.now().toString());
+        messageEntity.setMsgFrom(userId);
         return messageRepository.save(messageEntity);
     }
 
