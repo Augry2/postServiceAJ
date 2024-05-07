@@ -1,4 +1,16 @@
 services:
+  postapp:
+    image: ghcr.io/chatgut/post-service-aj:1.0
+    container_name: postservice
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    environment:
+      DB_URL: mongodb://mongodb:27017/postServiceAJdb
+      DB_USER: root
+      DB_PASSWORD: secret
+
   mongodb:
     image: 'mongo:latest'
     environment:
