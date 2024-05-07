@@ -10,21 +10,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MessageRepository extends MongoRepository<MessageEntity, String> {
-//
-//    Page<MessageEntity> findByFromEqualsIgnoreCaseAndToEqualsIgnoreCase(String fromUser,
-//                                                                        String toUser,
-//                                                                        Pageable pageable);
-//
-//    @Query("""
-//            {
-//
-//            "from": { "$in":[ ?0, ?1 ] },
-//            "to": { "$in": [ ?1, ?0]}
-//
-//            }
-//            """
-//    )
-//    Page<MessageEntity> findMessages(@Param("from") String fromUser, @Param("to") String toUser, Pageable pageable);
+
+    Page<MessageEntity> findByMsgFromIgnoreCaseAndMsgToIgnoreCase(String fromUser,
+                                                                  String toUser,
+                                                                  Pageable pageable);
+
+    @Query("{ $or: [ { 'msgFrom': ?0, 'msgTo': ?1 }, { 'msgFrom': ?1, 'msgTo': ?0 } ] }")
+    Page<MessageEntity> findMessages(@Param("from") String fromUser, @Param("to") String toUser, Pageable pageable);
 
 }
 
