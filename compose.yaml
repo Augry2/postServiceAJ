@@ -1,48 +1,43 @@
 services:
   postapp:
-    image: ghcr.io/chatgut/post-service-aj:sha256-ed5d3533f8e2e4e88d949ae20df20905c5f8874d945cfdb4e361edc437dedd8d
+    image: ghcr.io/chatgut/post-service-aj:main@sha256:5060248eb7f200acbe65016b860ccf42fc9add556c7dac0d18308c801ee9c937
     container_name: postservice
     ports:
-      - "8080:8080"
+      - "8090:8080"
     depends_on:
       - mongodb
     environment:
-      DB_URL: mongodb://mongodb:27017/postServiceAJdb
-      DB_USER: root
-      DB_PASSWORD: secret
+      - 'SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017'
     restart: on-failure
-
   mongodb:
     image: 'mongo:latest'
-    environment:
-      - 'MONGO_INITDB_DATABASE=postServiceAJdb'
-      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
-      - 'MONGO_INITDB_ROOT_USERNAME=root'
     ports:
       - '27017:27017'
-#  usersapp:
-#    image: ghcr.io/chatgut/userservice:1.0
-#    container_name: userservice
-#    ports:
-#      - "8002:8002"
-#    depends_on:
-#      - dbUsers
-#    environment:
-#      DB_URL: jdbc:mysql://dbUsers:3306/userService
-#      DB_USER: developer
-#      DB_PASSWORD: password
-#
-#  dbUsers:
-#    image: mysql:latest
-#    environment:
-#      MYSQL_ROOT_HOST: '%'
-#      MYSQL_ROOT_USER: root
-#      MYSQL_ROOT_PASSWORD: password
-#      MYSQL_DATABASE: userService
-#      MYSQL_PASSWORD: password
-#      MYSQL_USER: developer
-#    volumes:
-#      - dbUsers:/var/lib/mysql
+    volumes:
+        - mongodb:/data/db
+  usersapp:
+    image: ghcr.io/chatgut/userservice:1.0
+    container_name: userservice
+    ports:
+      - "8002:8002"
+    depends_on:
+      - dbUsers
+    environment:
+      DB_URL: jdbc:mysql://dbUsers:3306/userService
+      DB_USER: developer
+      DB_PASSWORD: password
+
+  dbUsers:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: userService
+      MYSQL_PASSWORD: password
+      MYSQL_USER: developer
+    volumes:
+      - dbUsers:/var/lib/mysql
 
 volumes:
   dbUsers:
