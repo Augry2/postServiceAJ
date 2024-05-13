@@ -62,7 +62,7 @@ This endpoint facilitates the creation of a new message within the system. It re
 
 ## Contributors
 - Jens Nilsson (@jn.jensnilsson@gmail.com)
-- August Rydnell (@august.rydnell@gmail.com)
+- August Rydnell (@august.ryd@gmail.com)
 
 
     
