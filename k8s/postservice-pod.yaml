@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postservice
+  labels:
+    role: postservice
+spec:
+  containers:
+    - name: postservice
+      image: ghcr.io/chatgut/post-service-aj:main
+      imagePullPolicy: IfNotPresent
+      ports:
+        - name: postservice
+          containerPort: 8080
+          protocol: TCP
+  restartPolicy: Always
+  
