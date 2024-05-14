@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: title
+  name: mongodb
 spec:
-  type: ClusterIP
   selector:
-    app: postserviceaj
+    app: mongodb
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 27017
+      targetPort: 27017
   
