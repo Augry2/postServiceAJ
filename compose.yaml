@@ -1,13 +1,13 @@
 services:
   postapp:
-    image: ghcr.io/chatgut/post-service-aj:main@sha256:5060248eb7f200acbe65016b860ccf42fc9add556c7dac0d18308c801ee9c937
+    image: ghcr.io/chatgut/post-service-aj:main@sha256:d2127380c82ba28d609ab9ef08afcc30510417eb1aa92d9d45b40402e8643dc2
     container_name: postservice
     ports:
       - "8090:8080"
     depends_on:
       - mongodb
     environment:
-      - 'SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017'
+      - 'SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/messages'
     restart: on-failure
   mongodb:
     image: 'mongo:latest'
