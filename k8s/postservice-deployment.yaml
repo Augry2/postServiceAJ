@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: postservice
-          image: test123:latest
+          image: ghcr.io/chatgut/post-service-aj:main
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
