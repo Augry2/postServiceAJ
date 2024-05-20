@@ -1,6 +1,6 @@
 services:
   postapp:
-    image: ghcr.io/chatgut/post-service-aj:main@sha256:5060248eb7f200acbe65016b860ccf42fc9add556c7dac0d18308c801ee9c937
+    image: ghcr.io/chatgut/post-service-aj:main@sha256:bcae4b8db3b89db8476c311e59fe202f25089cf46c6fa0a8b9127c1100b62205
     container_name: postservice
     ports:
       - "8090:8080"
