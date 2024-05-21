@@ -3,11 +3,10 @@ kind: Service
 metadata:
   name: postservice
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: postservice
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-      nodePort: 30080
