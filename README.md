@@ -18,11 +18,41 @@ The Post Service is responsible for storing messages along with their associated
 
 ## API Reference:
 
-using MongoDB
+requires MongoDB
 
 runs on port 8090
 
-### Endpoints:
+## How to run on Docker:
+
+## Step 1:
+
+```
+docker pull ghcr.io/chatgut/post-service-aj:main
+```
+
+## Step 2:
+
+```
+docker network create mynetwork
+```
+
+## Step 3:
+
+```
+docker run -d --name mongodb --network=mynetwork -p 27017:27017 mongo:latest
+```
+
+## Step 4:
+
+```
+docker run -d --name postapp --network=mynetwork -p 8090:8080 --env SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/messages ghcr.io/chatgut/post-service-aj:main
+```
+
+
+These commands will pull the latest image of post-service and build the service postapp together with mongodb.
+
+
+## Endpoints:
 #### GET /messages
 - This endpoint retrieves all messages from the database. It doesn't require any parameters.
 
