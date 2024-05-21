@@ -6,7 +6,7 @@ metadata:
   labels:
     app: postservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: postservice
@@ -23,6 +23,9 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: 'mongodb://mongodb:27017/messages'
       restartPolicy: Always
 
 
